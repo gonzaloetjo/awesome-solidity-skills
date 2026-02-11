@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:shields.io)",
+      "WebFetch(domain:contributing.md)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.contributor-covenant.org)",
+      "Bash(git init:*)",
+      "Bash(ls:*)",
+      "Bash(curl:*)",
+      "Bash(git config:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh repo list:*)",
+      "Bash(gh search:*)",
+      "Bash(gh api:*)",
+      "Bash(npx markdownlint-cli2:*)",
+      "Bash(npx awesome-lint:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

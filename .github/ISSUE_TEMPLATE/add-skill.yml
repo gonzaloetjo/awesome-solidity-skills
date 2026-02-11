@@ -1,0 +1,61 @@
+name: Add a Skill
+description: Suggest a Claude Code skill for Solidity/EVM development
+title: "Add skill: "
+labels: ["new-skill"]
+body:
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill Name
+      placeholder: e.g., Smart Contract Security
+    validations:
+      required: true
+  - type: input
+    id: repo-url
+    attributes:
+      label: Repository URL
+      placeholder: https://github.com/owner/repo
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      placeholder: "@githubhandle"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Security & Auditing
+        - Development & Architecture
+        - Testing
+        - DeFi & Tokens
+        - Deployment & Tooling
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: Brief description of what the skill does
+    validations:
+      required: true
+  - type: input
+    id: install-command
+    attributes:
+      label: Install Command
+      placeholder: "npx add-skill Skill-Name"
+    validations:
+      required: false
+  - type: checkboxes
+    id: quality-checklist
+    attributes:
+      label: Quality Checklist
+      options:
+        - label: I have tested the install command
+        - label: The description accurately reflects the skill's capabilities
+        - label: I have selected the correct category
+        - label: I have read the CONTRIBUTING guidelines
