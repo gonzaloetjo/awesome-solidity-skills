@@ -22,6 +22,7 @@
 - [DeFi & Tokens](#defi--tokens)
 - [Deployment & Tooling](#deployment--tooling)
 - [Related Tools](#related-tools)
+- [Risky Repositories](#risky-repositories)
 - [How to Install Skills](#how-to-install-skills)
 
 ## Security & Auditing
@@ -53,7 +54,6 @@
 - [Ethereum Dev Skill](https://github.com/minimalsm/ethereum-dev-skill) - Ethereum development with viem, wagmi, Foundry, and Solidity.
 - [Solidity Agent Kit](https://github.com/0xlayerghost/solidity-agent-kit) - Agent skills for Solidity and DeFi development with Foundry covering security, testing, and deployment.
 - [ContractKit](https://github.com/HCS412/contractkit) - Smart contract workspace with Claude Code integration for Ethereum and Foundry.
-- [EVM Agent Skills](https://github.com/SkandaBhat/evm-agent-skills) - Ethereum JSON-RPC skill with cast-backed execution and workflows for block analysis.
 - [Onchain TypeScript Skills](https://github.com/0xSardius/onchain-typescript-skills) - TypeScript blockchain development skills with Viem and Wagmi.
 - [Ember Skills](https://github.com/emberdragonc/ember-skills) - Solidity, Web3, and deployment pattern skills extracted from real builds.
 - [OP Stack Skills](https://github.com/pauldowman/op-claude-plugins) - Claude Code skills for working with OP Stack blockchains.
@@ -77,9 +77,7 @@
 
 - [DeFi Protocols Development](https://github.com/pluginagentmarketplace/custom-plugin-blockchain/tree/main/skills/defi-protocols) - Development skills for DeFi protocol implementation and integration.
 - [NFT Development](https://github.com/pluginagentmarketplace/custom-plugin-blockchain/tree/main/skills/nft-development) - NFT smart contract development including ERC-721 and ERC-1155 standards.
-- [Crypto Skills](https://github.com/kukapay/crypto-skills) - Collection of cryptocurrency agent skills including EVM blockchain operations, ERC20 token generation, and DeFi yield research.
 - [NFT Mint Skill](https://github.com/consensus-hq/nft-mint-skill) - ERC-721 NFT skill for deploying, minting, and transferring NFTs on Base and EVM chains.
-- [EVM Wallet Skill](https://github.com/surfer77/evm-wallet-skill) - EVM wallet operations skill for AI agents.
 - [8004 Skill](https://github.com/matteoscurati/8004skill) - ERC-8004 on-chain agent economy for registering agents and managing reputation across EVM chains.
 - [Bridging](https://github.com/celo-org/agent-skills/tree/main/skills/bridging) - Cross-chain asset bridging between EVM chains covering native bridges and third-party solutions.
 
@@ -95,16 +93,26 @@
 > MCP servers and complementary tools for Solidity development with Claude.
 
 - [Slither MCP](https://github.com/trailofbits/slither-mcp) - Trail of Bits' Slither static analysis framework as an MCP server for Claude.
-- [Foundry MCP Server](https://github.com/PraneshASP/foundry-mcp-server) - MCP server providing Foundry tool integration for Claude Code.
 - [Weasel](https://github.com/slvDev/weasel) - Solidity static analyzer with MCP integration for Claude Code, Cursor, and Windsurf.
 - [Solodit API Skill](https://github.com/BowTiedSwan/solodit-api-skill) - MCP server for searching smart contract vulnerabilities from Cyfrin Solodit.
 - [Foundry MCP (Rust)](https://github.com/0xClandestine/foundry-mcp-rs) - Rust MCP server exposing 170 Foundry tools with RPC discovery for 2400+ networks.
-- [EVM MCP Server](https://github.com/mcpdotdirect/evm-mcp-server) - MCP server providing blockchain services across 60+ EVM networks with 22 tools and ENS resolution.
 - [EVM MCP Tools](https://github.com/0xGval/evm-mcp-tools) - Blockchain analysis toolkit for smart contract auditing, wallet analysis, and on-chain data fetching.
 - [EVM MCP](https://github.com/JamesANZ/evm-mcp) - MCP server providing 20+ EVM JSON-RPC tools for any EVM-compatible node provider.
-- [MCP Crypto Wallet EVM](https://github.com/dcSpark/mcp-cryptowallet-evm) - MCP server for EVM wallet operations including creating wallets, checking balances, and sending transactions.
-- [Blockchain MCP](https://github.com/lienhage/blockchain-mcp) - MCP server for Ethereum vanity addresses, Cast commands, 4byte lookup, and calldata decoding.
 - [Arkham Intelligence Skill](https://github.com/Vyntral/arkham-intelligence-claude-skill) - Arkham Intelligence API integration for on-chain analytics, whale tracking, and smart money analysis.
+
+## Risky Repositories
+
+> These tools failed our [security audit](SECURITY_AUDIT.md). They are listed here to call them out, not to recommend them. Review source code and permissions carefully before installing.
+
+| Repository | Risk Level | Why |
+|------------|------------|-----|
+| [EVM Wallet Skill](https://github.com/surfer77/evm-wallet-skill) | Dangerous | Generates and stores a private key at `~/.evm-wallet.json`, giving the AI agent full hot wallet control. Mainnet-by-default across 6 chains. |
+| [MCP Crypto Wallet EVM](https://github.com/dcSpark/mcp-cryptowallet-evm) | Dangerous | Exposes private keys and mnemonics to LLM context via `wallet_get_private_key`. Full wallet lifecycle management. |
+| [Blockchain MCP](https://github.com/lienhage/blockchain-mcp) | Dangerous | Private key passed as plaintext tool parameter through LLM context. Sends transactions on 7 mainnets. |
+| [EVM MCP Server](https://github.com/mcpdotdirect/evm-mcp-server) | Dangerous | Private key/mnemonic via env vars across 60+ mainnet chains. HTTP mode binds to `0.0.0.0` (network-exposed). |
+| [Foundry MCP Server](https://github.com/PraneshASP/foundry-mcp-server) | Dangerous | Executes arbitrary Forge scripts and sends mainnet transactions with configured private key. No testnet enforcement. |
+| [EVM Agent Skills](https://github.com/SkandaBhat/evm-agent-skills) | Dangerous | Defaults to Ethereum mainnet with transaction signing and broadcasting via `cast`. Very broad RPC permissions. |
+| [Crypto Skills](https://github.com/kukapay/crypto-skills) | Unsafe | Token Minter deploys contracts requiring signing. Write operations via EVM Swiss Knife. No testnet safeguards. |
 
 ## How to Install Skills
 
